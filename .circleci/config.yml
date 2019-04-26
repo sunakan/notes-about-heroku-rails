@@ -33,4 +33,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - sample-sample
+      - sample-job
