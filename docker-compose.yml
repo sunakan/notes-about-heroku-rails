@@ -1,0 +1,12 @@
+---
+
+version: "3.7"
+
+services:
+  app:
+    working_dir: /app
+    image: ruby:2.6.3-slim-stretch
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - .:/app
