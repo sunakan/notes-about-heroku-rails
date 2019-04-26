@@ -73,9 +73,13 @@ commands:
           name: "Discordへ通知"
           command: |
             if << parameters.is_eval >>; then
-              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> << parameters.webhook >>
+              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
             else
-              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> << parameters.webhook >>
+              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
             fi
 
 ----
+
+. DiscordのチャンネルのWebhookをコピー
+** `https://discordapp.com/api/webhooks/xxxxxx`
+. CircleCI -> WORKFLOWS -> 歯車アイコン -> Environment Variables -> DISCORD_WEBHOOKを登録

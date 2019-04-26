@@ -26,9 +26,6 @@ commands:
   discord-notify:
     description: "Discordへ通知する"
     parameters:
-      webhook:
-        type: string
-        default: ${DISCORD_WEBHOOK}
       message:
         type: string
         default: "[${CIRCLE_BRANCH}] こんにちは世界"
@@ -43,9 +40,9 @@ commands:
           name: "Discordへ通知"
           command: |
             if << parameters.is_eval >>; then
-              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> << parameters.webhook >>
+              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
             else
-              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> << parameters.webhook >>
+              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
             fi
 
 jobs:
@@ -64,3 +61,4 @@ workflows:
   build:
     jobs:
       - sample-job
+      - notify
