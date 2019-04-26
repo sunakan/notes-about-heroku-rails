@@ -23,14 +23,42 @@ commands:
           name: "echo"
           command: echo "<< parameters.message >>";
 
+  discord-notify:
+    description: "Discordへ通知する"
+    parameters:
+      message:
+        type: string
+        default: "[${CIRCLE_BRANCH}] こんにちは世界"
+      is_eval:
+        type: boolean
+        default: false
+      timeout:
+        type: integer
+        default: 5
+    steps:
+      - run:
+          name: "Discordへ通知"
+          command: |
+            if << parameters.is_eval >>; then
+              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
+            else
+              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
+            fi
+
 jobs:
   sample-job:
     executor: node
     steps:
       - echo:
           message: "こんにちは世界"
+  notify:
+    executor: node
+    steps:
+      - discord-notify:
+          message: "[${CIRCLE_BRANCH}] Discordへ通知!!"
 
 workflows:
   build:
     jobs:
       - sample-job
+      - notify

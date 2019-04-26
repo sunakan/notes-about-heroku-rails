@@ -44,3 +44,42 @@ workflows:
     jobs:
       - sample-sample
 ----
+
+. .circleci/config.ymlにDiscordへの通知commandを追加
++
+----
+---
+version: 2.1
+
+commands:
+...
+  discord-notify:
+    description: "Discordへ通知する"
+    parameters:
+      webhook:
+        type: string
+        default: ${DISCORD_WEBHOOK}
+      message:
+        type: string
+        default: "[${CIRCLE_BRANCH}] こんにちは世界"
+      is_eval:
+        type: boolean
+        default: false
+      timeout:
+        type: integer
+        default: 5
+    steps:
+      - run:
+          name: "Discordへ通知"
+          command: |
+            if << parameters.is_eval >>; then
+              eval "<< parameters.message >>" | xargs -Imsg curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"msg\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
+            else
+              curl -X POST -H "Content-Type:application/json" -d "{\"content\": \"<< parameters.message >>\"}" --connect-timeout << parameters.timeout >> "${DISCORD_WEBHOOK}"
+            fi
+
+----
+
+. DiscordのチャンネルのWebhookをコピー
+** `https://discordapp.com/api/webhooks/xxxxxx`
+. CircleCI -> WORKFLOWS -> 歯車アイコン -> Environment Variables -> DISCORD_WEBHOOKを登録
