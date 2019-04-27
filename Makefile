@@ -14,3 +14,6 @@ run:
 # make bash
 bash:
 	@$(DC) run --rm app bash
+
+herokupush:
+	git push heroku `git rev-parse --abbrev-ref HEAD`:master

@@ -1,0 +1,54 @@
+== Heroku
+
+. heroku-cliでやったほうが楽
+. heroku login するときは、 --interactiveオプションをつけるとターミナルでできる
+. create
++
+----
+$ heroku create APPNAME
+----
++
+. heroku.ymlの用意
++
+.heroku.yml
+----
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: bundle exec puma -C config/puma.rb
+----
++
+. remote hrokuを追加
++
+----
+$ heroku git:remote --app APPNAME
+----
++
+. localからherokuへpush
+----
+$ git push heroku hoge:master
+or
+$ git push heroku feature/hoge:master
+----
++
+. heroku logs --tailで1つずつエラーをとる
+.. topページの用意
+. とれた
+. heroku run db:create必要しなくてもよかった(migrateは必要)
+. HEROKU_API_KEYの取得
+.. 右上のアカウントアイコンからAccount settings
+.. API Key
+. CircleCIに自動デプロイのために設定
+. Deploy時にでるWARNINGを1つずつ見ていく
+
+=== config.active_storage.service
+
+* ActiveStorage系は一旦置いとく
+* どうしても嫌ならactive_storageをOFFにする
+
+=== Procfile
+
+* Procfileはやっぱり必要？
+* 1度、heroku stack:set containerをする(HerokuでDocker)
+* Bundler2 -> 1へ変更
