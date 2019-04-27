@@ -1,3 +1,5 @@
 = Notes about heroku rails
 
+image:https://circleci.com/gh/sunakan/notes-about-heroku-rails/tree/master.svg?style=shield["CircleCI", link="https://circleci.com/gh/sunakan/notes-about-heroku-rails/tree/master"]
+
 image:https://img.shields.io/badge/license-MIT-blue.svg[MIT, link=LICENSE]
