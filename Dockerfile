@@ -17,7 +17,7 @@ COPY . ./
 
 # マルチステージビルドでdeploy用
 FROM ruby:2.6.3-slim-stretch as production
-ENV RAILS_ENV production
+ENV RAILS_ENV=production RACK_ENV=production
 WORKDIR /app
 RUN apt-get update && apt-get install -y wget gnupg2 curl
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' | tee /etc/apt/sources.list.d/pgdg.list && \
@@ -31,4 +31,4 @@ COPY --from=builder /app/vendor/bundle /app/vendor/bundle
 RUN gem uninstall bundler && gem install bundler -N -v=1.17.3 && \
   bundle install --no-cache -j4 --path=vendor/bundle --without development test && \
   bundle clean
-RUN bundle exec rake assets:precompile
+#RUN bundle exec rake assets:precompile
