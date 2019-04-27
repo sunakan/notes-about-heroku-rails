@@ -13,3 +13,4 @@ RUN apt-get update && \
   apt-get install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev libpq-dev postgresql-client nodejs
 COPY Gemfile* ./
 RUN bundle install -j4 --path vendor/bundle
+COPY . ./
