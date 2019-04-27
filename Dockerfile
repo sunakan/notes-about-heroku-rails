@@ -12,7 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update && \
   apt-get install -y build-essential patch ruby-dev zlib1g-dev liblzma-dev libpq-dev postgresql-client nodejs
 COPY Gemfile* ./
-RUN gem uninstall bundler && gem install bundler -v=1.17.3 && bundle install -j4 --path vendor/bundle
+RUN gem uninstall bundler && gem install bundler -N -v=1.17.3 && bundle install -j4 --path vendor/bundle
 COPY . ./
 
 # マルチステージビルドでdeploy用
@@ -27,7 +27,7 @@ RUN apt-get update && \
   apt-get autoclean && apt-get clean
 COPY . ./
 COPY --from=builder /app/vendor/bundle /app/vendor/bundle
-RUN gem uninstall bundler && gem install bundler -v=1.17.3 && \
+RUN gem uninstall bundler && gem install bundler -N -v=1.17.3 && \
   bundle install --no-cache -j4 --path=vendor/bundle --without development test && \
   bundle clean
 RUN RAILS_ENV=production bundle exec rake assets:precompile
