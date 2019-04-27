@@ -52,3 +52,6 @@ $ git push heroku feature/hoge:master
 * Procfileはやっぱり必要？
 * 1度、heroku stack:set containerをする(HerokuでDocker)
 * Bundler2 -> 1へ変更
+* heroku stack:set containerするといらないっぽい
+* stack:set containerにした時、assets:precompile に必要であろうmaster.keyをどうするかがわからない
+* heroku.ymlに環境変数を読み込ませることができるか?
