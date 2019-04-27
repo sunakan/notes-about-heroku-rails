@@ -1,0 +1,32 @@
+== DockerでRailsを用意するまで
+
+* railsのためのGemfileは `bundle init` より自分で書いたほうが楽
++
+.Gemfile
+----
+# frozen_string_literal: true
+source "https://rubygems.org"
+gem "rails"
+----
+
+----
+$ rails new -d postgres
+----
+
+* rails newした後のGemfileで書き換えたほうがいい部分
+** 2019年3月31日でchromedriver-helperのサポート切れ
++
+.Gemfile
+----
+...
+-  gem 'chromedriver-helper'
++  gem 'webdrivers'
+...
+----
+
+=== 注意点
+
+* nodejsもインストールする
+* postgresを利用するときはpostgres用のclientパッケージもインストールする
+** debianだと問題記事が上がっているため気をつける
+*** link:https://support.circleci.com/hc/ja/articles/360003953613-Docker-%E3%81%AB-postgresql-client-9-6-%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC[Docker に postgresql-client-9.6 をインストールする際のエラー]
