@@ -40,3 +40,14 @@ $ git push heroku feature/hoge:master
 .. 右上のアカウントアイコンからAccount settings
 .. API Key
 . CircleCIに自動デプロイのために設定
+. Deploy時にでるWARNINGを1つずつ見ていく
+
+=== config.active_storage.service
+
+* ActiveStorage系は一旦置いとく
+* どうしても嫌ならactive_storageをOFFにする
+
+=== Procfile
+
+* Procfileはやっぱり必要？
+* 1度、heroku stack:set containerをする(HerokuでDocker)
