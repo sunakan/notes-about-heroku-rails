@@ -1,0 +1,26 @@
+== Heroku
+
+. heroku-cliでやったほうが楽
+. heroku login するときは、 --interactiveオプションをつけるとターミナルでできる
+. create
++
+----
+$ heroku create APPNAME
+----
++
+. heroku.ymlの用意
++
+.heroku.yml
+----
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: bundle exec puma -C config/puma.rb
+----
++
+. remote hrokuを追加
++
+----
+$ heroku git:remote --app APPNAME
+----
