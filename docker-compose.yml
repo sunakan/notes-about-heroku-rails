@@ -6,7 +6,10 @@ services:
   app:
     working_dir: /app
     command: ./startup.sh
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
     environment:
       - TZ=Asia/Tokyo
     ports:
