@@ -30,4 +30,4 @@ COPY --from=builder /app/vendor/bundle /app/vendor/bundle
 RUN gem uninstall bundler && gem install bundler -N -v=1.17.3 && \
   bundle install --no-cache -j4 --path=vendor/bundle --without development test && \
   bundle clean
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+RUN bundle exec rake assets:precompile
