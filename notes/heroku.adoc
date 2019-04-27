@@ -34,3 +34,9 @@ $ git push heroku feature/hoge:master
 +
 . heroku logs --tailで1つずつエラーをとる
 .. topページの用意
+. とれた
+. heroku run db:create必要しなくてもよかった(migrateは必要)
+. HEROKU_API_KEYの取得
+.. 右上のアカウントアイコンからAccount settings
+.. API Key
+. CircleCIに自動デプロイのために設定
