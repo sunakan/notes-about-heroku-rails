@@ -24,3 +24,13 @@ run:
 ----
 $ heroku git:remote --app APPNAME
 ----
++
+. localからherokuへpush
+----
+$ git push heroku hoge:master
+or
+$ git push heroku feature/hoge:master
+----
++
+. heroku logs --tailで1つずつエラーをとる
+.. topページの用意
