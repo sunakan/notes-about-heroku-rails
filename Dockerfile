@@ -17,6 +17,7 @@ COPY . ./
 
 # マルチステージビルドでdeploy用
 FROM ruby:2.6.3-slim-stretch as production
+ENV RAILS_ENV production
 WORKDIR /app
 RUN apt-get update && apt-get install -y wget gnupg2 curl
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' | tee /etc/apt/sources.list.d/pgdg.list && \
