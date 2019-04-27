@@ -10,3 +10,4 @@ docker-compose.yml
 .rubocop.yml
 containers
 vendor/bundle
+config/master.key
