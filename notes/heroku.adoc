@@ -51,3 +51,4 @@ $ git push heroku feature/hoge:master
 
 * Procfileはやっぱり必要？
 * 1度、heroku stack:set containerをする(HerokuでDocker)
+* Bundler2 -> 1へ変更
